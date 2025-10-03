@@ -1,7 +1,7 @@
 import Booking from "../Model/Booking.js";
 
 // @desc Create new booking
-export const createBooking = async (req, res) => {
+ const createBooking = async (req, res) => {
   try {
     const { guestName, email, roomType, checkIn, checkOut } = req.body;
 
@@ -26,7 +26,7 @@ export const createBooking = async (req, res) => {
 };
 
 // @desc Get all bookings
-export const getBookings = async (req, res) => {
+ const getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find();
     res.json({ success: true, bookings });
@@ -36,7 +36,7 @@ export const getBookings = async (req, res) => {
 };
 
 // @desc Get single booking by ID
-export const getBookingById = async (req, res) => {
+ const getBookingById = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
     if (!booking) {
@@ -51,7 +51,7 @@ export const getBookingById = async (req, res) => {
 };
 
 // @desc Update booking
-export const updateBooking = async (req, res) => {
+ const updateBooking = async (req, res) => {
   try {
     const booking = await Booking.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -68,7 +68,7 @@ export const updateBooking = async (req, res) => {
 };
 
 // @desc Delete booking
-export const deleteBooking = async (req, res) => {
+ const deleteBooking = async (req, res) => {
   try {
     const booking = await Booking.findByIdAndDelete(req.params.id);
     if (!booking) {
@@ -82,7 +82,7 @@ export const deleteBooking = async (req, res) => {
   }
 };
 
-export default {
+export {
   createBooking,
   getBookings,
   getBookingById,

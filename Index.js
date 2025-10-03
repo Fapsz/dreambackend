@@ -4,13 +4,13 @@ import mongoose from 'mongoose';
 import cookieParser from "cookie-parser";
 import bookingRoutes from './routes/bookingRoutes.js'
 import roomsRoutes from './routes/roomsRoutes.js'
-
+import userRoutes from './routes/userRoutes.js'
 import e from "express";
 import cors from 'cors';
 import { config } from "dotenv";
 config()
 const app = e();
-const port = process.env.PORT || 3500;
+const port = process.env.PORT || 3004;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const MONGODB_URL = process.env.MONGODB_URI 
@@ -26,8 +26,6 @@ mongoose.connect(MONGODB_URL)
 app.use(cookieParser());
 
 
-app.use(cors());
-
 // Test route
 app.get("/", (req, res) => {
   res.send("DreamHotel Backend is running 🚀");
@@ -39,7 +37,7 @@ app.use(e.urlencoded({extended:true}))
 app.use(e.static('./box'))
 
 app.use(cors({
-    origin: ['http://localhost:5173' ,"https://DREAMBACKEND-react-xi.vercel.app"],
+    origin: ['http://localhost:5173',"https://connection-react-xi.vercel.app"],
     credentials: true,
 }));        
 
@@ -48,6 +46,7 @@ app.get('/',(req,res)=>{
 })
 app.use("/bookings", bookingRoutes);
 app.use("/rooms", roomsRoutes);
+app.use('/users',userRoutes)
 
 
 app.listen(port,()=>{

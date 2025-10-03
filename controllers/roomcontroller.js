@@ -1,7 +1,7 @@
 import Room from "../Model/Room.js";
 
 // @desc Create new room
-export const createRoom = async (req, res) => {
+ const createRoom = async (req, res) => {
   try {
     const { title, description, price, roomType } = req.body;
 
@@ -22,9 +22,7 @@ export const createRoom = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
-
-// @desc Get all rooms
-export const getRooms = async (req, res) => {
+ const getRooms = async (req, res) => {
   try {
     const rooms = await Room.find();
     res.json({ success: true, rooms });
@@ -34,7 +32,7 @@ export const getRooms = async (req, res) => {
 };
 
 // @desc Get single room
-export const getRoomById = async (req, res) => {
+ const getRoomById = async (req, res) => {
   try {
     const room = await Room.findById(req.params.id);
     if (!room) {
@@ -49,7 +47,7 @@ export const getRoomById = async (req, res) => {
 };
 
 // @desc Update room
-export const updateRoom = async (req, res) => {
+ const updateRoom = async (req, res) => {
   try {
     const updates = req.body;
     if (req.files) {
@@ -72,7 +70,7 @@ export const updateRoom = async (req, res) => {
 };
 
 // @desc Delete room
-export const deleteRoom = async (req, res) => {
+ const deleteRoom = async (req, res) => {
   try {
     const room = await Room.findByIdAndDelete(req.params.id);
     if (!room) {
@@ -84,5 +82,6 @@ export const deleteRoom = async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
+
 };
-export default { createRoom, getRooms, getRoomById, updateRoom, deleteRoom };
+export { createRoom, getRooms, getRoomById, updateRoom, deleteRoom };
