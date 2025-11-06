@@ -64,4 +64,5 @@ import Guest from "../Model/Guest.js";
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 export { getDashboardSummary, getAllUsers, getAllBookings, getAllRooms, getAllGuests };

@@ -14,4 +14,5 @@ router.get("/", authorize(["Admin"]), getMessages);
 // Admin: Delete a message
 router.delete("/:id", authorize(["Admin"]), deleteMessage);
 
+
 export default router;

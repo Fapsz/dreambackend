@@ -37,7 +37,7 @@ app.use(e.urlencoded({extended:true}))
 app.use(e.static('./box'))
 
 app.use(cors({
-    origin: ['http://localhost:5173',"https://connection-react-xi.vercel.app"],
+    origin: ['http://localhost:5173',"https://Dreamhotel-react-xi.vercel.app"],
     credentials: true,
 }));        
 
@@ -52,6 +52,6 @@ app.use('/users',userRoutes)
 app.listen(port,()=>{
     console.log(`server is runninng on port : ${port}`)
     // console.log("server is running on port " + port)
-})
+});
 
 
