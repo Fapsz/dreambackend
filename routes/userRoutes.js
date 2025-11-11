@@ -7,6 +7,7 @@ import {
   getAllUsers,
   update1user,
 } from "../controllers/usercontroller.js";
+
 import authorize from "../middlewares/authorize.js";
 
 const router = e.Router();
