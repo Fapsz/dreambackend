@@ -37,7 +37,8 @@ app.use(e.urlencoded({extended:true}))
 app.use(e.static('./box'))
 
 app.use(cors({
-    origin: ['http://localhost:5173',"https://Dreamhotel-react-xi.vercel.app"],
+    origin: ['http://localhost:5173',
+        "https://my-project-seven-sage.vercel.app"],
     credentials: true,
 }));        
 
