@@ -51,7 +51,6 @@ app.use("/bookings", bookingRoutes);
 app.use("/rooms", roomsRoutes);
 app.use("/users", userRoutes);
 // also accept singular /user so frontend that posts to /user/register works
-app.use("/user", userRoutes);
 
 app.listen(port, () => {
   console.log(`server is runninng on port : ${port}`);
