@@ -1,10 +1,24 @@
 import Booking from "../Model/Booking.js";
 
 // @desc Create new booking
- const createBooking = async (req, res) => {
+export const createBooking = async (req, res) => {
   try {
     const { guestName, email, roomType, checkIn, checkOut } = req.body;
 
+    // 1️⃣ Check if this user already booked this room
+    const existingBooking = await Booking.findOne({
+      email,
+      roomType,
+    });
+
+    if (existingBooking) {
+      return res.status(409).json({
+        success: false,
+        message: "Room unavailable: You have already booked this room.",
+      });
+    }
+
+    // 2️⃣ Create new booking
     const booking = new Booking({
       guestName,
       email,
@@ -15,18 +29,19 @@ import Booking from "../Model/Booking.js";
 
     await booking.save();
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Booking created successfully",
       booking,
     });
+
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 
 // @desc Get all bookings
- const getBookings = async (req, res) => {
+export const getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find();
     res.json({ success: true, bookings });
@@ -36,7 +51,7 @@ import Booking from "../Model/Booking.js";
 };
 
 // @desc Get single booking by ID
- const getBookingById = async (req, res) => {
+export const getBookingById = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
     if (!booking) {
@@ -51,7 +66,7 @@ import Booking from "../Model/Booking.js";
 };
 
 // @desc Update booking
- const updateBooking = async (req, res) => {
+export const updateBooking = async (req, res) => {
   try {
     const booking = await Booking.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -68,7 +83,7 @@ import Booking from "../Model/Booking.js";
 };
 
 // @desc Delete booking
- const deleteBooking = async (req, res) => {
+export const deleteBooking = async (req, res) => {
   try {
     const booking = await Booking.findByIdAndDelete(req.params.id);
     if (!booking) {
