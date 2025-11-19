@@ -34,7 +34,6 @@ export const createBooking = async (req, res) => {
       message: "Booking created successfully",
       booking,
     });
-
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message });
   }
@@ -97,10 +96,5 @@ export const deleteBooking = async (req, res) => {
   }
 };
 
-export {
-  createBooking,
-  getBookings,
-  getBookingById,
-  updateBooking,
-  deleteBooking,
-};
+// (Named exports are used above for each handler)
+export default {createBooking, getBookings, getBookingById, updateBooking, deleteBooking};
